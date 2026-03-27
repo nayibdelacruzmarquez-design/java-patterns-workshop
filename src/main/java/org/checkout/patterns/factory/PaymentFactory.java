@@ -1,6 +1,6 @@
 package org.checkout.patterns.factory;
 
-import org.checkout.patterns.workshop.adapter.ExternalPaymentAdapter;
+import org.checkout.workshop.adapter.ExternalPaymentAdapter;
 
 /**
  * Fábrica encargada de instanciar el procesador de pago correcto.

@@ -1,6 +1,6 @@
 package org.checkout.patterns.builder;
 
-import org.checkout.patterns.workshop.model.Order;
+import org.checkout.workshop.model.Order;
 
 /**
  * Interfaz que define el contrato para la construcción de objetos Order.

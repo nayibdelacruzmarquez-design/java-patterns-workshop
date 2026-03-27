@@ -1,7 +1,7 @@
 package org.checkout.patterns.builder;
 
-import org.checkout.patterns.workshop.model.Order;
-import org.checkout.patterns.workshop.model.OrderItem;
+import org.checkout.workshop.model.Order;
+import org.checkout.workshop.model.OrderItem;
 
 import java.util.ArrayList;
 import java.util.List;
