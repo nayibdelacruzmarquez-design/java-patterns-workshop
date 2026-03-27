@@ -1,4 +1,4 @@
-package org.checkout.patterns.workshop.builder;
+package org.checkout.patterns.builder;
 
 import org.checkout.patterns.workshop.model.Order;
 import org.checkout.patterns.workshop.model.OrderItem;

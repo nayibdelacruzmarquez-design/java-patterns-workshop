@@ -1,6 +1,6 @@
 package org.checkout.patterns.workshop.decorator;
 
-import org.checkout.patterns.workshop.factory.PaymentProcessor;
+import org.checkout.patterns.factory.PaymentProcessor;
 
 /**
  * Decorador que añade una capa de Logging.

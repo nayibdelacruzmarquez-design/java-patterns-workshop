@@ -1,4 +1,4 @@
-package org.checkout.patterns.workshop.builder;
+package org.checkout.patterns.builder;
 
 /**
  * Clase que orquesta la construcción de órdenes siguiendo recetas predefinidas.

@@ -1,9 +1,9 @@
 package org.checkout.patterns.workshop.facade;
 
+import org.checkout.patterns.factory.PaymentFactory;
+import org.checkout.patterns.factory.PaymentProcessor;
 import org.checkout.patterns.workshop.decorator.LoggerPaymentDecorator;
 import org.checkout.patterns.workshop.decorator.SuccessNotificationDecorator;
-import org.checkout.patterns.workshop.factory.PaymentFactory;
-import org.checkout.patterns.workshop.factory.PaymentProcessor;
 import org.checkout.patterns.workshop.model.Order;
 import org.checkout.patterns.workshop.strategy.DiscountStrategy;
 

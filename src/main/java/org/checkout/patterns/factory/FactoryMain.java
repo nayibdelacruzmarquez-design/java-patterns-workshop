@@ -1,4 +1,4 @@
-package org.checkout.patterns.workshop.factory;
+package org.checkout.patterns.factory;
 
 /**
  * Clase de prueba para el patrón de diseño Factory Method.

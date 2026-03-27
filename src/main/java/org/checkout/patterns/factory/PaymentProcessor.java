@@ -1,4 +1,4 @@
-package org.checkout.patterns.workshop.factory;
+package org.checkout.patterns.factory;
 
 /**
  * Contrato base para cualquier estrategia de pago en el sistema.

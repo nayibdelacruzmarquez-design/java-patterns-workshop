@@ -1,4 +1,4 @@
-package org.checkout.patterns.workshop.factory;
+package org.checkout.patterns.factory;
 
 /**
  * Implementación del procesador de pagos para Tarjetas de Crédito.

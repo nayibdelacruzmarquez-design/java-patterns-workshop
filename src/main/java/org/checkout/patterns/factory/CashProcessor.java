@@ -1,4 +1,4 @@
-package org.checkout.patterns.workshop.factory;
+package org.checkout.patterns.factory;
 
 /**
  * Implementación de pago en efectivo.

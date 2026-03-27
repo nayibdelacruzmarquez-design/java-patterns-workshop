@@ -1,6 +1,6 @@
 package org.checkout.patterns.workshop.adapter;
 
-import org.checkout.patterns.workshop.factory.PaymentProcessor;
+import org.checkout.patterns.factory.PaymentProcessor;
 
 /**
  * Adaptador que hace que el ExternalPaySDK sea compatible con
