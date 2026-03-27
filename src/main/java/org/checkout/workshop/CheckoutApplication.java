@@ -46,7 +46,7 @@ public class CheckoutApplication {
         int d = scanner.nextInt();
         DiscountStrategy estrategia = (d == 2) ? new LoyalCustomerDiscount() : new NewCustomerDiscount();
 
-        // 2. BUILDER: Construimos la orden con TODO lo que escribiste
+        // 2. BUILDER: Construimos la orden con todo lo que escribiste
         Order myOrder = Order.builder()
                 .customerName(nombreCliente)
                 .customerEmail(nombreCliente.toLowerCase().replace(" ", "") + "@mail.com")
