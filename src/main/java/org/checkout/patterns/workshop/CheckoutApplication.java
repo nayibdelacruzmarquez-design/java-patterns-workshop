@@ -15,71 +15,65 @@ import java.util.Scanner;
 
 public class CheckoutApplication {
     public static void main(String[] args) {
-        Scanner lector = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        // 1. SINGLETON: Configuración global
+        // 1. SINGLETON: Configuración personalizada
         AppConfiguration config = AppConfiguration.getInstance();
-        config.setBusinessName("Refaccionaria Nayib - Professional Systems");
-        System.out.println("🔧 Bienvenido a: " + config.getBusinessName());
+        System.out.print("Nombre de la sucursal: ");
+        config.setBusinessName(scanner.nextLine()); // Tú escribes el nombre del negocio
+
+        System.out.println("\n🔧 Bienvenido a: " + config.getBusinessName());
         System.out.println("========================================");
 
-        // --- INTERACCIÓN CON EL USUARIO ---
+        // --- DATOS DEL CLIENTE ---
+        System.out.print("Nombre del cliente: ");
+        String nombreCliente = scanner.nextLine();
 
-        // Elección de Pago
-        System.out.println("\n[1] Seleccione método de pago:");
-        System.out.println("1. PAYPAL");
-        System.out.println("2. CASH");
-        System.out.println("3. EXTERNAL (Adapter)");
-        System.out.print("Opción: ");
-        int opPago = lector.nextInt();
-        String metodoSeleccionado = switch (opPago) {
-            case 1 -> "PAYPAL";
-            case 3 -> "EXTERNAL";
-            default -> "CASH";
-        };
+        // --- DATOS DEL PRODUCTO ---
+        System.out.print("Producto a comprar (ej. Amortiguador): ");
+        String prodNombre = scanner.nextLine();
+        System.out.print("Precio unitario: ");
+        double precio = scanner.nextDouble();
+        System.out.print("Cantidad: ");
+        int cant = scanner.nextInt();
 
-        // Elección de Descuento (Patrón Strategy)
-        System.out.println("\n[2] Seleccione tipo de cliente:");
-        System.out.println("1. Cliente Nuevo (Sin descuento)");
-        System.out.println("2. Cliente Leal (15% descuento)");
-        System.out.print("Opción: ");
-        int opDesc = lector.nextInt();
-        DiscountStrategy estrategiaSeleccionada = (opDesc == 2)
-                ? new LoyalCustomerDiscount()
-                : new NewCustomerDiscount();
+        // --- SELECCIÓN DE PATRONES (MÉTODO Y ESTRATEGIA) ---
+        System.out.println("\n[PAGO] 1.PAYPAL, 2.CASH, 3.EXTERNAL:");
+        int p = scanner.nextInt();
+        String mPago = (p == 1) ? "PAYPAL" : (p == 3) ? "EXTERNAL" : "CASH";
 
-        // 2. MODEL & LOMBOK BUILDER: Creamos la orden con tus elecciones
+        System.out.println("[DESCUENTO] 1.Nuevo, 2.Leal:");
+        int d = scanner.nextInt();
+        DiscountStrategy estrategia = (d == 2) ? new LoyalCustomerDiscount() : new NewCustomerDiscount();
+
+        // 2. BUILDER: Construimos la orden con TODO lo que escribiste
         Order myOrder = Order.builder()
-                .customerName("Nayib")
-                .customerEmail("nayib@ejemplo.com")
-                .shippingAddress("Av. Reforma 123")
-                .paymentMethod(metodoSeleccionado)
+                .customerName(nombreCliente)
+                .customerEmail(nombreCliente.toLowerCase().replace(" ", "") + "@mail.com")
+                .shippingAddress("Direccion General #1")
+                .paymentMethod(mPago)
                 .items(List.of(
                         OrderItem.builder()
-                                .productName("Amortiguador Delantero")
-                                .quantity(2)
-                                .price(500.0)
+                                .productName(prodNombre)
+                                .quantity(cant)
+                                .price(precio)
                                 .build()
                 ))
                 .build();
 
-        // 3. FACADE: Nuestra interfaz simplificada
+        // 3. FACADE: Orquestador
         CheckoutFacade facade = new CheckoutFacade();
 
-        // 4. COMMAND: Encolamos la petición usando las elecciones del teclado
-        PlaceOrderCommand command = new PlaceOrderCommand(
-                facade,
-                myOrder,
-                estrategiaSeleccionada
-        );
+        // 4. COMMAND: Encolar
+        PlaceOrderCommand command = new PlaceOrderCommand(facade, myOrder, estrategia);
 
-        // 5. INVOKER: Procesa la cola
+        // 5. INVOKER: Procesar
         OrderInvoker invoker = new OrderInvoker();
         invoker.takeOrder(command);
 
-        System.out.println("\n⏳ [SISTEMA]: Procesando pedidos en cola...\n");
+        System.out.println("\n⏳ [SISTEMA]: Ejecutando comandos de venta...\n");
         invoker.processOrders();
 
-        lector.close();
+        scanner.close();
     }
 }
